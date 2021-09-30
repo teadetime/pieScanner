@@ -8,8 +8,8 @@ Here’s a photo of our final results of a scan of the letter “O”
 
 RESULT PHOTO!
 <p align="center">
-  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="30%">
-  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="60%">
+  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="50%">
+  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="50%">
   <br/>
   TEST
 </p>
