@@ -13,6 +13,8 @@ RESULT PHOTO!
   <i>Figure 0 </i>
 </p>
 
+<figcaption>The Amazon Rainforest contains a multitude of species.</figcaption>
+
 ## Testing Equipment
 ___
 
