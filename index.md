@@ -217,6 +217,8 @@ Our scanning method consists of many single scans going from left-to-right and r
 </p>
 
 #### Conversion from 3d Polar to Cartesian points (Stella)
+In order to find the x and y coordinates, we needed to consider what the vector of the IR sensor to the point projected onto the xy plane would look like. When the sensor is pointing directly forward the tilt and pan angles are 0°. We know that the distance * cos(tilt angle) would give us the magnitude of length of the shadow of the full vector(on the xy plane), as the ‘tilt’ angle operates on the z axis and the distance tells us how far the point is. To get the rest of the equation, we needed to consider the ‘pan’ angle, which exclusively operates parallel to or in the xy plane as we’ve defined in our system. To get ‘x’, we took the x component of the vector in the xy plane, which gives us the equation x = Distance * cos(pan angle) * cos(tilt angle). Using the same logic, y = Distance * sin(pan angle) * cos(tilt angle). ‘z’ is just the component of the vector of the IR sensor to the point that is normal to the xy axis, which gives us z = Distance * sin(tilt angle).
+Figure 3.4 shows this calculation where pan and tilt values are stored in columns 1 and 2 of the ‘values’ matrix. These coordinates are then scatter plotted.
 
 ``` matlab
 % Conversion from Polar to Cartesian Coordinates
@@ -228,6 +230,7 @@ scat(:,3) = distance(:,1).* sind(values(:,2));                % Z Values
 <p align="center">
   <i>Figure 3.4: Matlab snippet that converts polar coordinates to cartesian</i>
 </p>
+
 #### Final 3d Scan
 We wanted to push our scanner and see how it did on more than a single letter! We decided to try scanning a corner in the hallway from ontop of a table. This scan was large and took ~10 minutes. Figure 3.5 shows the setup and resulting final scan(on the computer screen).
 
