@@ -8,7 +8,7 @@ RESULT PHOTO!
   <img src="images/oScanSetup.jpg" width="49%">
   <img src="images/oScan.png" width="49%">
   <br/>
-  <i>Figure 0 </i>
+  <i>Figure 0: Setup and Scan Env.(Left) and Resulting 3D Point Cloud (Right) </i>
 </p>
 
 Please see these links if oyu are looking for all files used:
@@ -65,16 +65,14 @@ __Trim high and low values and average with a loop time ~50ms__
 __Learning that material matters__
 
 During these tests we were primarily measuring a large piece of cardboard perpendicular to the sensor. However, during some of the tests we used a different tissue box that totally messed up readings.
-![TISSUE BOX]()
-![PLOT OF SINE WAVE]()
 <p align="center">
-  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="49%">
-  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="49%">
+  <img src="images/balckBox.jpg" width="49%">
+  <img src="images/reflective25.png" width="49%">
   <br/>
-  <i>Figure 0 </i>
+  <i>Figure 1:  Reflective Tissue Box(Left) and Resulting Sinusoidal Sensor Readings (Right)</i>
 </p>
 
-Figure XXXXX shows sequential readings over 5 seconds. These exhibit a huge range and are sinusoidal. This was very confusing and we are unsure how this happened except for the fact that the material was somewhat reflective. Based on this info we will be testing with just cardboard and matte surfaces.
+Figure 1 shows the tissue box and the sequential readings over 25 seconds. These exhibit a huge range and are sinusoidal with a consistent period?! This was very confusing and we are unsure how this happened except for the fact that the material was somewhat reflective. Based on this info we will be testing with just cardboard and matte surfaces.
 
 
 #### Calibrating Sensor
