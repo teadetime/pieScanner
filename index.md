@@ -6,7 +6,7 @@ Here’s a photo of our final results of a scan of the letter “O” in Figure 
 RESULT PHOTO!
 <p align="center">
   <img src="images/oScanSetup.jpg" width="49%">
-  <img src="mages/oScan.png" width="49%">
+  <img src="images/oScan.png" width="49%">
   <br/>
   <i>Figure 0 </i>
 </p>
