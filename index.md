@@ -86,7 +86,7 @@ Our calibration setup used a large matte object with our sensor perpendicular to
   <img src="images/calibration.jpg" width="49%">
   <img src="images/calibrationData.png" width="41%">
   <br>
-  <i>Figure 3:  Calibration Setup using trash can(Left) and resulting sensor readings for calibration curve (Right)</i>
+  <i>Figure 3:  Calibration setup(Left) and resulting sensor readings for calibration curve (Right)</i>
 </p>
 
 
@@ -114,16 +114,28 @@ The pan tilt mechanism was 3D-printed and designed from scratch. The CAD can be 
 
 Another key point is to ensure that all rotation is around the center of the sensor. If the sensor translates in space during movement, we would need to do math to determine the new position of the sensor as opposed to having a constant location for our sensor. For example if we scanned a sphere from it’s centerpoint we would expect that our distance readings should be the same for all points. If our mechanism was designed such that rotation didn’t go through the sensor we would have different distance readings since the sensor would be translating in the sphere during a scan.
 
-The cad model in FIGURE SOMETHING doesn’t show the sensor or servos but is roughly laid out in the correct space.
-![INSERT IMAGE WITH FULL CAD]() RIGHT NEXT TO FULL IMAGE OF 3dSENSOR
-
-The pan and tilt parts are shown in greater detail in Figure SOMETHING
-![](SIDE BY SIDE OF BOTH OTHER CAD MODELS)
+The cad model in Figure 7's CAD doesn’t show the sensor or servos but is roughly laid out in the correct space. The pan and tilt parts are shown in greater detail in Figure 8.
+<p align="center">
+  <img src="images/finalMechanism.jpg" width="41%">
+  <img src="images/fullModel.png" width="48%">
+  <br>
+  <i>Figure 7: Pan/Tilt Scanner(Left) and CAD used to manufacture parts(Right)</i>
+  <br>
+  <br>
+  <img src="images/panBracket.png" width="49%">
+  <img src="images/tilt.png" width="49%">
+  <br>
+  <i>Figure 8: Pan bracket CAD(Left) and Tilt Bracket CAD(Right)</i>
+</p>
 
 #### Final Circuit Picture and Diagram
-![CIRCUIT DIAGRAM]()
+<p align="center">
+  <img src="images/circuit.png" width="90%">
+  <br>
+  <i>Figure 9: Circuit Digram with Button, IR Rangefinder and 2 Servos</i>
+</p>
 
-FIGURE SOMETHING shows the layout of our circuit. This adds a button for us to start and switch between scanning modes. Our two servos are controlled via the [arduino servo library](https://www.arduino.cc/reference/en/libraries/servo/) and are wired to PWM pins on the Arduino. The IR Rangefinder is an analog sensor so its output is connected to an analog pin on the Arduino.
+Figure 9 shows the layout of our circuit. This adds a button for us to start and switch between scanning modes. Our two servos are controlled via the [arduino servo library](https://www.arduino.cc/reference/en/libraries/servo/) and are wired to PWM pins on the Arduino. The IR Rangefinder is an analog sensor so its output is connected to an analog pin on the Arduino.
 
 
 ## Data processing
