@@ -6,8 +6,8 @@ Here’s a photo of our final results of a scan of the letter “O” in Figure 
 RESULT PHOTO!
 <p align="center">
   <img src="images/oScan.png" width="100%">
-  <br/>
   <i>Figure 0: 3D Point Cloud from Scan Data of the "O" </i>
+  <br>
   <br>
   <img src="images/oScanSetup.jpg" width="100%">
   <br>
@@ -84,9 +84,9 @@ Obviously the units that we get from the Arduino are not representative of a dis
 Our calibration setup used a large matte object with our sensor perpendicular to it.
 <p align="center">
   <img src="images/calibration.jpg" width="49%">
-  <img src="images/calibrationData.png" width="49%">
-  <br/>
-  <i>Figure 3:  Calibration Setup using Trash(Left) and resulting sensor readings used for calibration curve (Right)</i>
+  <img src="images/calibrationData.png" width="41%">
+  <br>
+  <i>Figure 3:  Calibration Setup using trash can(Left) and resulting sensor readings for calibration curve (Right)</i>
 </p>
 
 
@@ -96,15 +96,18 @@ From the data in Figure 3 we were able to curve fit an equation that related the
   <br/>
   <i>Figure 4:  Calibration Graph showing curve-fit equation</i>
   <br>
+  <br>
   <img src="images/equation.png" width="100%">
   <br/>
   <i>Figure 5: Resulting equation of curve fit in Figure 4 </i>
 </p>
-![]Insert phot of equations
-![](INSERT PHOTO OD plot)
 
-We wanted to validate how well our calibration curve was working so we took measurements a separate day with data points that were not in our curve fit. This data allowed us to compare our prediction(made using our conversion equation) to the ground truth (measurement via a ruler). FIGURE SOMTHING shows this data. Note that the predicted values are very close to the actual values(The value that is furthest off is <.5”). This validates our calibration curve.
-![](FIGURE SOMETHING)
+We wanted to validate how well our calibration curve was working so we took measurements a separate day with data points that were not in our curve fit. This data allowed us to compare our prediction(made using our conversion equation) to the ground truth (measurement via a ruler). Figure 6 shows this data. Note that the predicted values are very close to the actual values. For reference, the value that is furthest off is <.5”. This validates our calibration curve.
+<p align="center">
+  <img src="images/errorGraph.png" width="100%">
+  <br>
+  <i>Figure 6:  Calibration Setup using trash can(Left) and resulting sensor readings for calibration curve (Right)</i>
+</p>
 
 ## Mechanism Design
 The pan tilt mechanism was 3D-printed and designed from scratch. The CAD can be found [here](https://cad.onshape.com/documents/00404c6b682243b94410b231/w/e0565735532057e490157cf3/e/47ad195450b799a5f13700f5). We focused on making our parts small but still stiff and using press-fit connections instead of additional fasteners. We need the mechanical system to be stiff such that we can get repeatable positioning. 
