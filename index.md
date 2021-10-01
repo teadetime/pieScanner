@@ -1,12 +1,12 @@
 ## Intro 
 This project explores one possible way of making a 3d scanner or rather a 3d-scan from a given point. This project shows how this can be done with relatively few low-cost materials. The project uses an arduino, 2 hobby-size servos and one [IR rangefinder](https://www.pololu.com/product/1137) to measure distance. A scan will be made via a pan/tilt mechanism that allows the sensor to read a variety of different distances for different points within the range of the mechanism. 
 
-Here’s a photo of our final results of a scan of the letter “O”
+Here’s a photo of our final results of a scan of the letter “O” in Figure 0
 
 RESULT PHOTO!
 <p align="center">
   <img src="images/oScanSetup.jpg" width="49%">
-  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="49%">
+  <img src="mages/oScan.png" width="49%">
   <br/>
   <i>Figure 0 </i>
 </p>
