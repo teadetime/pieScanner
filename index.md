@@ -8,10 +8,9 @@ RESULT PHOTO!
   <img src="images/oScan.png" width="100%">
   <br/>
   <i>Figure 0: 3D Point Cloud from Scan Data of the "O" </i>
-</p>
-<p align="center">
+  <br>
   <img src="images/oScanSetup.jpg" width="100%">
-  <br/>
+  <br>
   <i>Figure 1: Setup and Scan Environment</i>
 </p>
 
@@ -96,6 +95,7 @@ From the data in Figure 3 we were able to curve fit an equation that related the
   <img src="images/calibrationGraph.png" width="100%">
   <br/>
   <i>Figure 4:  Calibration Graph showing curve-fit equation</i>
+  <br>
   <img src="images/equation.png" width="100%">
   <br/>
   <i>Figure 5: Resulting equation of curve fit in Figure 4 </i>
