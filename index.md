@@ -66,7 +66,7 @@ __Learning that material matters__
 
 During these tests we were primarily measuring a large piece of cardboard perpendicular to the sensor. However, during some of the tests we used a different tissue box that totally messed up readings.
 <p align="center">
-  <img src="images/balckBox.jpg" width="49%">
+  <img src="images/blackBox.jpg" width="49%">
   <img src="images/reflective25.png" width="49%">
   <br/>
   <i>Figure 1:  Reflective Tissue Box(Left) and Resulting Sinusoidal Sensor Readings (Right)</i>
