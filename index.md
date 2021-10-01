@@ -104,9 +104,9 @@ From the data in Figure 3 we were able to curve fit an equation that related the
 
 We wanted to validate how well our calibration curve was working so we took measurements a separate day with data points that were not in our curve fit. This data allowed us to compare our prediction(made using our conversion equation) to the ground truth (measurement via a ruler). Figure 6 shows this data. Note that the predicted values are very close to the actual values. For reference, the value that is furthest off is <.5”. This validates our calibration curve.
 <p align="center">
-  <img src="images/errorGraph.png" width="100%">
+  <img src="images/errorPlot.png" width="100%">
   <br>
-  <i>Figure 6:  Calibration Setup using trash can(Left) and resulting sensor readings for calibration curve (Right)</i>
+  <i>Figure 6:  Error plot of predicted vs actual distances for never-seen data</i>
 </p>
 
 ## Mechanism Design
