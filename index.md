@@ -11,7 +11,7 @@ RESULT PHOTO!
   <br>
   <img src="images/oScanSetup.jpg" width="100%">
   <br>
-  <i>Figure 1: Setup and Scan Environment</i>
+  <i>Figure 0.1: Setup and Scan Environment</i>
 </p>
 
 Please see these links if you are looking for all files used:
@@ -41,8 +41,13 @@ __Average values for 1 second reading every loop without delays__
 __Average values for 1 second reading every loop with a loop time of ~50ms__
 - This gave us average values that were similar to what our one-off readings were
 - More stable than single readings but still had large jumps occasionally
-- This spurred more investigation into the values that we were getting ![IMAGE SHOWING READING EVERY 50 MS with spikes]()
-- Obviously there is a periodic spike that we don’t want that could be throwing our average off (See next approach)
+- This spurred more investigation into the values that we were getting so we looked at 5 seconds of data polling every 50ms
+  <p align="center">
+    <img src="images/spikes5.png" width="49%">
+    <br>
+    <i>Figure 1.0: 5 Seconds of sensor data sampled every 50ms, Note the spikes</i>
+  </p>
+- Obviously Figure 1.0 has a periodic spike that we don’t want that could be throwing our average off (See next approach)
 
 __Trim high and low values and average with a loop time ~50ms__
 - We will trim out the extremes of our readings(spikes in either direction)
@@ -72,41 +77,41 @@ During these tests we were primarily measuring a large piece of cardboard perpen
   <img src="images/blackBox.jpg" width="48%">
   <img src="images/reflective25.png" width="51%">
   <br/>
-  <i>Figure 2:  Reflective Tissue Box(Left) and Resulting Sinusoidal Sensor Readings (Right)</i>
+  <i>Figure 1.1:  Reflective Tissue Box(Left) and Resulting Sinusoidal Sensor Readings (Right)</i>
 </p>
 
-Figure 2 shows the tissue box and the sequential readings over 25 seconds. These exhibit a huge range and are sinusoidal with a consistent period?! This was very confusing and we are unsure how this happened except for the fact that the material was somewhat reflective. Based on this info we will be testing with just cardboard and matte surfaces.
+Figure 1.1 shows the tissue box and the sequential readings over 25 seconds. These exhibit a huge range and are sinusoidal with a consistent period?! This was very confusing and we are unsure how this happened except for the fact that the material was somewhat reflective. Based on this info we will be testing with just cardboard and matte surfaces.
 
 
 #### Calibrating Sensor
-Obviously the units that we get from the Arduino are not representative of a distance that we can understand. To understand the relationship between our sensor readings and real-world distance we will create a calibration curve looking at sensor data as it relates to a known measurement. This curve will be curvefit over the effective distance range (20-150cm) such that we can estimate a distance based solely on a sensor reading. This process was done as shown in Figure 3 using a stationary sensor, and a large matte object at known distances(hence the tapemeasure).
+Obviously the units that we get from the Arduino are not representative of a distance that we can understand. To understand the relationship between our sensor readings and real-world distance we will create a calibration curve looking at sensor data as it relates to a known measurement. This curve will be curvefit over the effective distance range (20-150cm) such that we can estimate a distance based solely on a sensor reading. This process was done as shown in Figure 1.2 using a stationary sensor, and a large matte object at known distances(hence the tapemeasure).
 
 Our calibration setup used a large matte object with our sensor perpendicular to it.
 <p align="center">
   <img src="images/calibration.jpg" width="49%">
   <img src="images/calibrationData.png" width="41%">
   <br>
-  <i>Figure 3:  Calibration setup(Left) and resulting sensor readings for calibration curve (Right)</i>
+  <i>Figure 1.2:  Calibration setup(Left) and resulting sensor readings for calibration curve (Right)</i>
 </p>
 
 
-From the data in Figure 3 we were able to curve fit an equation that related the Arduino AnalogRead voltage to the distance in meters. Figure SOMETHING shows this plot, note that it is not linear! The equation for this relationship is given in FIGURE SOMETIHNG where “v” is the AnalogRead value.
+From the data in Figure 1.2 we were able to curve fit an equation that related the Arduino AnalogRead voltage to the distance in meters. Figure 1.3 shows this plot, note that it is not linear! The equation for this relationship is given in Figure 1.4 where “v” is the AnalogRead value.
 <p align="center">
   <img src="images/calibrationGraph.png" width="100%">
   <br/>
-  <i>Figure 4:  Calibration Graph showing curve-fit equation</i>
+  <i>Figure 1.3:  Calibration Graph showing curve-fit equation</i>
   <br>
   <br>
   <img src="images/equation.png" width="100%">
   <br/>
-  <i>Figure 5: Resulting equation of curve fit in Figure 4 </i>
+  <i>Figure 1.4: Resulting equation of curve fit in Figure 4 </i>
 </p>
 
-We wanted to validate how well our calibration curve was working so we took measurements a separate day with data points that were not in our curve fit. This data allowed us to compare our prediction(made using our conversion equation) to the ground truth (measurement via a ruler). Figure 6 shows this data. Note that the predicted values are very close to the actual values. For reference, the value that is furthest off is <.5”. This validates our calibration curve.
+We wanted to validate how well our calibration curve was working so we took measurements a separate day with data points that were not in our curve fit. This data allowed us to compare our prediction(made using our conversion equation) to the ground truth (measurement via a ruler). Figure 1.5 shows this data. Note that the predicted values are very close to the actual values. For reference, the value that is furthest off is <.5”. This validates our calibration curve.
 <p align="center">
   <img src="images/errorPlot.png" width="100%">
   <br>
-  <i>Figure 6:  Error plot of predicted vs actual distances for never-seen data</i>
+  <i>Figure 1.5:  Error plot of predicted vs actual distances for never-seen data</i>
 </p>
 
 ## Mechanism Design
@@ -114,28 +119,28 @@ The pan tilt mechanism was 3D-printed and designed from scratch. The CAD can be 
 
 Another key point is to ensure that all rotation is around the center of the sensor. If the sensor translates in space during movement, we would need to do math to determine the new position of the sensor as opposed to having a constant location for our sensor. For example if we scanned a sphere from it’s centerpoint we would expect that our distance readings should be the same for all points. If our mechanism was designed such that rotation didn’t go through the sensor we would have different distance readings since the sensor would be translating in the sphere during a scan.
 
-The cad model in Figure 7's CAD doesn’t show the sensor or servos but is roughly laid out in the correct space. The pan and tilt parts are shown in greater detail in Figure 8.
+The CAD model in Figure 2.0 doesn’t show the sensor or servos but is roughly laid out in the correct space. The pan and tilt parts are shown in greater detail in Figure 2.1.
 <p align="center">
   <img src="images/finalMechanism.jpg" width="41%">
   <img src="images/fullModel.png" width="48%">
   <br>
-  <i>Figure 7: Pan/Tilt Scanner(Left) and CAD used to manufacture parts(Right)</i>
+  <i>Figure 2.0: Pan/Tilt Scanner(Left) and CAD used to manufacture parts(Right)</i>
   <br>
   <br>
   <img src="images/panBracket.png" width="49%">
   <img src="images/tilt.png" width="49%">
   <br>
-  <i>Figure 8: Pan bracket CAD(Left) and Tilt Bracket CAD(Right)</i>
+  <i>Figure 2.1: Pan bracket CAD(Left) and Tilt Bracket CAD(Right)</i>
 </p>
 
 #### Final Circuit Picture and Diagram
 <p align="center">
   <img src="images/circuit.png" width="90%">
   <br>
-  <i>Figure 9: Circuit Digram with Button, IR Rangefinder and 2 Servos</i>
+  <i>Figure 2.2: Circuit Digram with Button, IR Rangefinder and 2 Servos</i>
 </p>
 
-Figure 9 shows the layout of our circuit. This adds a button for us to start and switch between scanning modes. Our two servos are controlled via the [arduino servo library](https://www.arduino.cc/reference/en/libraries/servo/) and are wired to PWM pins on the Arduino. The IR Rangefinder is an analog sensor so its output is connected to an analog pin on the Arduino.
+Figure 2.2 shows the layout of our circuit. This adds a button for us to start and switch between scanning modes. Our two servos are controlled via the [arduino servo library](https://www.arduino.cc/reference/en/libraries/servo/) and are wired to PWM pins on the Arduino. The IR Rangefinder is an analog sensor so its output is connected to an analog pin on the Arduino.
 
 
 ## Data processing
@@ -144,31 +149,74 @@ As mentioned previously while testing the sensor we did a lot of processing to t
 We mention a “scan” many times but do not define it well. A scan is the movement of our pan/tilt mechanism through a variety of pan and tilt angles such that we are receiving distance measurements for the area that we move through. This data can then be used to create a 3d mapping of those points in space and hence the object/view that our scanner is looking at.
 
 #### Sending/Receiving the Data
-The Arduino works great to do simple processing but is not appropriate for doing distance calculation, point conversions, or visualization of our scans. For this reason we are sending the basic data that includes the angle that each servo is pointing(SEE FIGURE SOMETHING LEFT), and the distance recorded by the sensor over serial to our computer. The computer receives this data (FIGURE SOMETHING) in Matlab and is able to do post-processing to convert these polar coordinates into cartesian space. (See Conversion from Polar to Cartesian for more info)
-![EXAMPLE OF SENDING DATA]()
+The Arduino works great to do simple processing but is not appropriate for doing distance calculation, point conversions, or visualization of our scans. For this reason we are sending the basic data. Figure 3.0 showsthe angle that each servo is pointing, and the distance recorded by the sensor beings sent over serial to our computer. The computer receives this data, as shown in Figure 3.1, in Matlab and is able to does post-processing to convert these polar coordinates into cartesian space. (See Conversion from Polar to Cartesian for more info)
 ``` c
-        qsort(distArray, numReadings, sizeof(short), cmpfunc);
-        readingCounter = 0;
-        // Now Average
-        for (int i=arrayFront; i<(sizeof(distArray) - arrayBack)/sizeof(distArray[0]); i++) {
-          readingCounter += 1;
-          totalReading += distArray[i];
-        }
-        avgReading = totalReading/readingCounter;
-        Serial.print(panPos-panZero);    Serial.print(",");
-        Serial.print(tiltPos-tiltZero);    Serial.print(",");
-        Serial.print(avgReading);    Serial.print(",");
-        Serial.println("0");
+qsort(distArray, numReadings, sizeof(short), cmpfunc);
+readingCounter = 0;
+// Now Average
+for (int i=arrayFront; i<(sizeof(distArray) - arrayBack)/sizeof(distArray[0]); i++) {
+  readingCounter += 1;
+  totalReading += distArray[i];
+}
+avgReading = totalReading/readingCounter;
+Serial.print(panPos-panZero);    Serial.print(",");
+Serial.print(tiltPos-tiltZero);    Serial.print(",");
+Serial.print(avgReading);    Serial.print(",");
+Serial.println("0");
 ```
-![EXAMPLE RECEIVING DATA]()
-``` matlab
+<p align="center">
+  <i>Figure 3.0: Arduino Code Snippet that averages data and sends it via Serial</i>
+</p>
+<br>
+</br>
 
+```Matlab
+% Conversion from Polar to Cartesian Coordinates
+port = "/dev/ttyACM0" %Choose which port to use for Arduino (proabably best to hardcode)
+baudrate = 9600;
+s = serialport(port,baudrate);
+q = 0
+values = NaN(1,4);
+%initialize a timeout in case MATLAB cannot connect to the arduino
+timeout = 0;
+% main loop to read data from the Arduino, then display it%
+while timeout < 10    %    % check if data was received    %    
+    while s.NumBytesAvailable > 0     
+        timeout = 0;        
+        %        
+        % data was received, convert it into array of integers        
+        %        
+        value = eval(strcat('[',readline(s),']'));              
+        a = value(1);        
+        b = value(2);        
+        c = value(3);        
+        d = value(4);          
+        disp(sprintf('a,b,c,d = %d,%d,%d,%d\n',[a,b,c,d]));
+        q = q + 1;
+        values(q,:) = [a b c d]; % Put data into a useable format
+    end
+    pause(0.5);    
+    timeout = timeout + 1;
+end
 ```
+<p align="center">
+  <i>Figure 3.1: Matlab code snippet that collects Arduino data(Figure 10) via Serial</i>
+</p>
 
 #### Preliminary Single Scan
-Our scanning method consists of many single scans going from left-to-right and right-to-left(think zigzag grid). We started by doing a single scan with no tilt enabled across the letter “O”. We expect there to be 2 clusters of values with low distance readings (the parts of the O) and the rest of the points to be very far away. FIGURE SOMETHING shows our setup and the resulting distance versus angle graph.
-1[INSERT SETUP PHOTO]()
-![INSERT GRAPH PHOTO]()
+Our scanning method consists of many single scans going from left-to-right and right-to-left(think zigzag grid). We started by doing a single scan with no tilt enabled across the letter “O”. We expect there to be 2 clusters of values with low distance readings (the parts of the O) and the rest of the points to be very far away. Figure 3.2 shows our setup and Figure 3.3 shows the resulting scan in angle vs distance and cartesian space. These plots make sense as they show two groups of points that are closer to the sensor. These are the two parts of the "O" since we scanned near the middle of it.
+<p align="center">
+  <br>
+  <img src="images/oScanSetup.jpg" width="49%">
+  <br>
+  <i>Figure 3.2: Single Scan Setup</i>
+  <br>
+  <br>
+  <img src="images/singleScan.png" width="49.5%">
+  <img src="images/topDown.png" width="48%">
+  <br>
+  <i>Figure 3.3: Single scan angle versus distance(Left) and the same data in a cartesian space "top-down"(Right)</i>
+</p>
 
 #### Conversion from 3d Polar to Cartesian points (Stella)
 
@@ -180,29 +228,45 @@ scat(:,2) = distance(:,1).* sind(values(:,1)).*cosd(values(:,2));  % Y Values
 scat(:,3) = distance(:,1).* sind(values(:,2));                % Z Values
 
 ```
+<p align="center">
+  <i>Figure 3.4: Matlab snippet that converts polar coordinates to cartesian</i>
+</p>
+#### Final 3d Scan
+We wanted to push our scanner ans see how it did on more than a single letter! We decided to try scanning a corner in the hallway from ontop of a table. This scan was large and took ~10 minutes. Figure 3.5 shows the setup and resulting final scan(on the computer screen).
+
+<p align="center">
+  <br>
+  <img src="images/wallScanFinal.jpg" width="100%">
+  <br>
+  <i>Figure 3.5: 3D scan of wall and table, note the wd plot's match to real space</i>
+</p>
+This plot owkred really well and was able to pick up many of the features within the scan range like the edge of the table and the corner. Better yet, our walls appeared very flat!
 
 ## Other notable code parts
 Our entire code can be found [here](https://github.com/teadetime/pieScanner/). The key pieces have already been called out in earlier portions of this doc.
 
-However, we also wanted to highlight some other cool features of our code. For instance in addition to averaging, sorting and trimming values, we wait for the servo to be in position fora specified amount of time. This is shown in FIGURE SOMETHING and ensures that the servo has stopped twitching and the mechanism is at rest
+However, we also wanted to highlight some other cool features of our code. For instance in addition to averaging, sorting and trimming values, we wait for the servo to be in position for a specified amount of time. This is shown in Figure 4.0 and ensures that the servo has stopped twitching and the mechanism is at rest
 ``` c
 if(moving){
-      // Make sure it's been step delay time since moving
-      if((currTime - lastStepTime) > stepDelay ){
-        moving = false;
+  // Make sure it's been step delay time since moving
+  if((currTime - lastStepTime) > stepDelay ){
+    moving = false;
   }
 }
 else{//NOT MOVING, this means we are reading from sensor!
-      if (readingCounter >= numReadings){
-            LastStepTime = currTime;
-            moving = true;
-        …
-}
-...
+  if (readingCounter >= numReadings){
+    LastStepTime = currTime;
+    moving = true;
+    . . . 
+  }
+  . . . 
 }
 ```
+<p align="center">
+  <i>Figure 4.0: Arduino snippet showing pause for movement to stop</i>
+</p>
 
-We also programmed a separate mode that passes our array of data over serial for plotting in Matlab. This was used for inspection of readings over time. Figure SOMETHING shows this mode.
+We also programmed a separate mode that passes our array of data over serial for plotting in Matlab. This was used for inspection of readings over time. Figure 4.1 shows this mode.
 ``` c
 else if(mode == 1){
     if(readingCounter < numReadings){
@@ -238,8 +302,11 @@ else if(mode == 1){
     }
   }
 ```
+<p align="center">
+  <i>Figure 4.1: Sending reading array via serial</i>
+</p>
 
-The core of our scanning code is moving the servo, checking to see if a reading should be sent and if the tilt servo should be moved up. This causes a side to side “grid” scanning motion. 
+Figure 4.2 shows the core of our scanning code is moving the servo, checking to see if a reading should be sent and if the tilt servo should be moved up. This causes a side-to-side “grid” scanning motion.
 
 ``` c
 void loop() {
@@ -316,66 +383,8 @@ if(moving){
     } 
 }
 ```
+<p align="center">
+  <i>Figure 4.2: Core panning logic, including data pre-processing</i>
+</p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-You can use the [editor on GitHub](https://github.com/teadetime/pieScanner/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/teadetime/pieScanner/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Reflection
