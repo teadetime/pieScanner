@@ -387,4 +387,12 @@ if(moving){
 
 ## Reflection
 ___
+We have very different backgrounds and experiences for this project. For example this was the first time Stella had ever worked with servo motors and is very new to coding, particularly when it comes to Arduino. Nathan has had more experience with the electronics and software, and was able to take the lead on parts of the project. While challenging, we learned how to navigate these gaps in a way that still allowed Stella to learn (for example, Stella worked on the MATLAB code, an area she was eager to improve) without putting all the weight on Nathan. We struggled at multiple points in the project like when we were getting incredibly noisy data because we were scanning a reflective object.
+
+When we first began the project, we had trouble getting consistent distance sensing, we would get outputs that ranged wildly. This would not lead to very useful data when scanning the object because it could have led to an unclear plot. We tried averaging the outputs for every second of data points, with little improvement. Finally, we plotted a series of points in MATLAB and saw how the data would spike severely. In order to reduce the noise, we decided to cut out the highest and lowest spikes - the outliers -  and average just the center points. This gave us far more consistent data. A particularly great moment was that we got a really nice scan of our letter on the first try(Figure 0.0 in the intro).
+
+In future interations, we would like to refine the data even further to cut out extra noise, which can be represented by the extraneous points on the plot that don’t picture the “O” or the wall behind it. We would also like to add a color code to differentiate the object we are trying to scan from the background. 
+
+This project was overall a large success in that both of us learned things and had fun despite an experience gap. We also are proud of ourselves for challenging ourselves to work with someone new and across grade as opposed to going for the “safe” option of a friend.
+
 
