@@ -1,17 +1,21 @@
 ## Intro 
 This project explores one possible way of making a 3d scanner or rather a 3d-scan from a given point. This project shows how this can be done with relatively few low-cost materials. The project uses an arduino, 2 hobby-size servos and one [IR rangefinder](https://www.pololu.com/product/1137) to measure distance. A scan will be made via a pan/tilt mechanism that allows the sensor to read a variety of different distances for different points within the range of the mechanism. 
 
-Here’s a photo of our final results of a scan of the letter “O” in Figure 0
+Here’s a photo of our final results of a scan of the letter “O” in Figure 0 resulting from the setup shown in Figure 1.
 
 RESULT PHOTO!
 <p align="center">
-  <img src="images/oScanSetup.jpg" width="49%">
-  <img src="images/oScan.png" width="49%">
+  <img src="images/oScan.png" width="100%">
   <br/>
-  <i>Figure 0: Setup and Scan Env.(Left) and Resulting 3D Point Cloud (Right) </i>
+  <i>Figure 0: 3D Point Cloud from Scan Data of the "O" </i>
+</p>
+<p align="center">
+  <img src="images/oScanSetup.jpg" width="100%">
+  <br/>
+  <i>Figure 1: Setup and Scan Environment</i>
 </p>
 
-Please see these links if oyu are looking for all files used:
+Please see these links if you are looking for all files used:
 
 [CAD](https://cad.onshape.com/documents/00404c6b682243b94410b231/w/e0565735532057e490157cf3/e/47ad195450b799a5f13700f5)
 
@@ -66,23 +70,36 @@ __Learning that material matters__
 
 During these tests we were primarily measuring a large piece of cardboard perpendicular to the sensor. However, during some of the tests we used a different tissue box that totally messed up readings.
 <p align="center">
-  <img src="images/blackBox.jpg" width="49%">
-  <img src="images/reflective25.png" width="49%">
+  <img src="images/blackBox.jpg" width="48%">
+  <img src="images/reflective25.png" width="51%">
   <br/>
-  <i>Figure 1:  Reflective Tissue Box(Left) and Resulting Sinusoidal Sensor Readings (Right)</i>
+  <i>Figure 2:  Reflective Tissue Box(Left) and Resulting Sinusoidal Sensor Readings (Right)</i>
 </p>
 
-Figure 1 shows the tissue box and the sequential readings over 25 seconds. These exhibit a huge range and are sinusoidal with a consistent period?! This was very confusing and we are unsure how this happened except for the fact that the material was somewhat reflective. Based on this info we will be testing with just cardboard and matte surfaces.
+Figure 2 shows the tissue box and the sequential readings over 25 seconds. These exhibit a huge range and are sinusoidal with a consistent period?! This was very confusing and we are unsure how this happened except for the fact that the material was somewhat reflective. Based on this info we will be testing with just cardboard and matte surfaces.
 
 
 #### Calibrating Sensor
-Obviously the units that we get from the Arduino are not representative of a distance that we can understand. To understand the relationship between our sensor readings and real-world distance we will create a calibration curve looking at sensor data as a=it relates to a known measurement. This curve will be curvefit over the effective distance range (20-150cm) such that we can estimate a distance based solely on a sensor reading.
+Obviously the units that we get from the Arduino are not representative of a distance that we can understand. To understand the relationship between our sensor readings and real-world distance we will create a calibration curve looking at sensor data as it relates to a known measurement. This curve will be curvefit over the effective distance range (20-150cm) such that we can estimate a distance based solely on a sensor reading. This process was done as shown in Figure 3 using a stationary sensor, and a large matte object at known distances(hence the tapemeasure).
 
 Our calibration setup used a large matte object with our sensor perpendicular to it.
-![INSERT PICTURE WITH TAPE MEASURE!]()
-![PICTURE OF EXCEL TABLE](Resulting data Is shown here)
+<p align="center">
+  <img src="images/calibration.jpg" width="49%">
+  <img src="images/calibrationData.png" width="49%">
+  <br/>
+  <i>Figure 3:  Calibration Setup using Trash(Left) and resulting sensor readings used for calibration curve (Right)</i>
+</p>
 
-From the above data we were able to curve fit an equation that related the Arduino AnalogRead voltage to the distance in meters. Figure SOMETHING shows this plot, note that it is not linear! The equation for this relationship is given in FIGURE SOMETIHNG where “v” is the AnalogRead value.
+
+From the data in Figure 3 we were able to curve fit an equation that related the Arduino AnalogRead voltage to the distance in meters. Figure SOMETHING shows this plot, note that it is not linear! The equation for this relationship is given in FIGURE SOMETIHNG where “v” is the AnalogRead value.
+<p align="center">
+  <img src="images/calibrationGraph.png" width="100%">
+  <br/>
+  <i>Figure 4:  Calibration Graph showing curve-fit equation</i>
+  <img src="images/equation.png" width="100%">
+  <br/>
+  <i>Figure 5: Resulting equation of curve fit in Figure 4 </i>
+</p>
 ![]Insert phot of equations
 ![](INSERT PHOTO OD plot)
 
