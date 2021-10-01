@@ -1,7 +1,7 @@
 ## Intro 
 This project explores one possible way of making a 3d scanner or rather a 3d-scan from a given point. This project shows how this can be done with relatively few low-cost materials. The project uses an arduino, 2 hobby-size servos and one [IR rangefinder](https://www.pololu.com/product/1137) to measure distance. A scan will be made via a pan/tilt mechanism that allows the sensor to read a variety of different distances for different points within the range of the mechanism. 
 
-Here’s a photo of our final results of a scan of the letter “O” in Figure 0.0 resulting from the setup shown in Figure 0.1.
+Figure 0.0 shows our final scan of the letter “O” from the setup shown in Figure 0.1.
 <p align="center">
   <img src="images/oScan.png" width="100%">
   <i>Figure 0.0: 3D Point Cloud from Scan Data of the "O" </i>
@@ -20,7 +20,6 @@ Please see these links if you are looking for all files used:
 
 ## Testing Equipment
 ___
-
 ### Testing Sensors
 The feasibility and accuracy of our system hinges entirely on how precise and accurate of measurements we can read. Servos are very good at accurately positioning themselves however, we were curious how stable the readings from the Sharp IR Rangefinder were. 
 We started out simply reading the distance as an analog value with a 10 µF capacitor between 5v and ground as per the [sensor datasheet](https://www.pololu.com/file/0J156/gp2y0a02yk_e.pdf). We tested several scenarios to obtain clean data from the sensor:
@@ -32,9 +31,9 @@ __Sample once every 2 seconds__
   - Data obviously followed a trend but the readings were slightly different each time (+/- 5 units)
 
 __Average values for 1 second reading every loop without delays__
-- This tried to smooth our input and it did in a way but we got ridiculously low values (could have been programming error)
-- Results showed more stability, but less resolution despite being stable
-- We attributed error to reading too quickly (see next experiment)
+- This tried to smooth our input by averaging a lot of values.  It did in a way but we got ridiculously low values (could have been programming error)
+- readings were more stabile, but had less resolution despite being more stable
+- We attributed error(0 was a common average) to reading too quickly (see next experiment)
 
 __Average values for 1 second reading every loop with a loop time of ~50ms__
 - This gave us average values that were similar to what our one-off readings were
@@ -65,8 +64,8 @@ __Trim high and low values and average with a loop time ~50ms__
   //Now Send
   Serial.println(avgReading);    Serial.print(",");
   ```
-- This approach stores consecutive readings rather than summing them (increased memory usage) and takes more time
-- Very Accurate and precise. Values are stable and change significantly less than other methods.
+- This approach stores consecutive readings rather than summing them (increased memory usage) and takes more time due to sorting
+- Readings were very accurate and precise. Values are more stable than other methods.
 
 __Learning that material matters__
 
@@ -102,7 +101,7 @@ From the data in Figure 1.2 we were able to curve fit an equation that related t
   <br>
   <img src="images/equation.png" width="100%">
   <br/>
-  <i>Figure 1.4: Resulting equation of curve fit in Figure 4 </i>
+  <i>Figure 1.4: Resulting equation of curve fit in Figure 1.3 </i>
 </p>
 
 We wanted to validate how well our calibration curve was working so we took measurements a separate day with data points that were not in our curve fit. This data allowed us to compare our prediction(made using our conversion equation) to the ground truth (measurement via a ruler). Figure 1.5 shows this data. Note that the predicted values are very close to the actual values. For reference, the value that is furthest off is <.5”. This validates our calibration curve.
@@ -113,6 +112,7 @@ We wanted to validate how well our calibration curve was working so we took meas
 </p>
 
 ## Mechanism Design
+___
 The pan tilt mechanism was 3D-printed and designed from scratch. The CAD can be found [here](https://cad.onshape.com/documents/00404c6b682243b94410b231/w/e0565735532057e490157cf3/e/47ad195450b799a5f13700f5). We focused on making our parts small but still stiff and using press-fit connections instead of additional fasteners. We need the mechanical system to be stiff such that we can get repeatable positioning. 
 
 Another key point is to ensure that all rotation is around the center of the sensor. If the sensor translates in space during movement, we would need to do math to determine the new position of the sensor as opposed to having a constant location for our sensor. For example if we scanned a sphere from it’s centerpoint we would expect that our distance readings should be the same for all points. If our mechanism was designed such that rotation didn’t go through the sensor we would have different distance readings since the sensor would be translating in the sphere during a scan.
@@ -138,16 +138,17 @@ The CAD model in Figure 2.0 doesn’t show the sensor or servos but is roughly l
   <i>Figure 2.2: Circuit Digram with Button, IR Rangefinder and 2 Servos</i>
 </p>
 
-Figure 2.2 shows the layout of our circuit. This adds a button for us to start and switch between scanning modes. Our two servos are controlled via the [arduino servo library](https://www.arduino.cc/reference/en/libraries/servo/) and are wired to PWM pins on the Arduino. The IR Rangefinder is an analog sensor so its output is connected to an analog pin on the Arduino.
+Figure 2.2 shows the layout of our circuit. We added a button for us to start and switch between scanning modes. Our two servos are controlled via the [arduino servo library](https://www.arduino.cc/reference/en/libraries/servo/) and are wired to PWM pins on the Arduino. The IR Rangefinder is an analog sensor so its output is connected to an analog pin on the Arduino.
 
 
 ## Data processing
-As mentioned previously while testing the sensor we did a lot of processing to the output o achieve accurate and precise results. One thing that we didn’t mention is the field-of-view of the sensor. We calibrated with large flat pieces of cardboard when in reality we will be reading the edge which may give back weird data. This is something we are ignoring for the purposes of this project but could handle on the software side or simply do multiple scans from different directions.
-
+___
 We mention a “scan” many times but do not define it well. A scan is the movement of our pan/tilt mechanism through a variety of pan and tilt angles such that we are receiving distance measurements for the area that we move through. This data can then be used to create a 3d mapping of those points in space and hence the object/view that our scanner is looking at.
 
+As mentioned previously while testing the sensor we did a lot of processing to the output to achieve accurate and precise results. One thing that we didn’t mention is the field-of-view of the sensor. We calibrated with large flat pieces of cardboard when in reality we will be reading the edge at some point druing a scan which may give back weird data. This is something we are ignoring for the purposes of this project but could handle on the software side or simply do multiple scans from different directions.
+
 #### Sending/Receiving the Data
-The Arduino works great to do simple processing but is not appropriate for doing distance calculation, point conversions, or visualization of our scans. For this reason we are sending the basic data. Figure 3.0 showsthe angle that each servo is pointing, and the distance recorded by the sensor beings sent over serial to our computer. The computer receives this data, as shown in Figure 3.1, in Matlab and is able to does post-processing to convert these polar coordinates into cartesian space. (See Conversion from Polar to Cartesian for more info)
+The Arduino works great to do simple processing but is not appropriate for doing distance calculation, point conversions, or visualization of our scans. For this reason we are sending the basic data. Figure 3.0 shows how the angle that each servo is pointing, and the distance recorded by the sensor are sent over serial to our computer. The computer receives this data, as shown in Figure 3.1, in Matlab and is able to does post-processing to convert these polar coordinates into cartesian space. (See Conversion from Polar to Cartesian for more info)
 ``` c
 qsort(distArray, numReadings, sizeof(short), cmpfunc);
 readingCounter = 0;
@@ -166,7 +167,6 @@ Serial.println("0");
   <i>Figure 3.0: Arduino Code Snippet that averages data and sends it via Serial</i>
 </p>
 <br>
-</br>
 
 ```Matlab
 % Conversion from Polar to Cartesian Coordinates
@@ -224,23 +224,23 @@ distance = polyval(p,values(:,3));                    % Calculate Distance in Me
 scat(:,1) = distance(:,1).* cosd(values(:,1)).*cosd(values(:,2)); % X Zalues
 scat(:,2) = distance(:,1).* sind(values(:,1)).*cosd(values(:,2));  % Y Values
 scat(:,3) = distance(:,1).* sind(values(:,2));                % Z Values
-
 ```
 <p align="center">
   <i>Figure 3.4: Matlab snippet that converts polar coordinates to cartesian</i>
 </p>
 #### Final 3d Scan
-We wanted to push our scanner ans see how it did on more than a single letter! We decided to try scanning a corner in the hallway from ontop of a table. This scan was large and took ~10 minutes. Figure 3.5 shows the setup and resulting final scan(on the computer screen).
+We wanted to push our scanner and see how it did on more than a single letter! We decided to try scanning a corner in the hallway from ontop of a table. This scan was large and took ~10 minutes. Figure 3.5 shows the setup and resulting final scan(on the computer screen).
 
 <p align="center">
   <br>
   <img src="images/wallScanFinal.jpg" width="100%">
   <br>
-  <i>Figure 3.5: 3D scan of wall and table, note the wd plot's match to real space</i>
+  <i>Figure 3.5: 3D scan of wall and table, note the plot's match to real space</i>
 </p>
-This plot owkred really well and was able to pick up many of the features within the scan range like the edge of the table and the corner. Better yet, our walls appeared very flat!
+This plot/scan worked really well and was able to pick up many of the features within the scan range like the edge of the table and the corner. Better yet, our walls appeared very flat!
 
 ## Other notable code parts
+___
 Our entire code can be found [here](https://github.com/teadetime/pieScanner/). The key pieces have already been called out in earlier portions of this doc.
 
 However, we also wanted to highlight some other cool features of our code. For instance in addition to averaging, sorting and trimming values, we wait for the servo to be in position for a specified amount of time. This is shown in Figure 4.0 and ensures that the servo has stopped twitching and the mechanism is at rest
@@ -261,7 +261,7 @@ else{//NOT MOVING, this means we are reading from sensor!
 }
 ```
 <p align="center">
-  <i>Figure 4.0: Arduino snippet showing pause for movement to stop</i>
+  <i>Figure 4.0: Arduino snippet showing pause for movement to come to rest</i>
 </p>
 
 We also programmed a separate mode that passes our array of data over serial for plotting in Matlab. This was used for inspection of readings over time. Figure 4.1 shows this mode.
@@ -301,7 +301,7 @@ else if(mode == 1){
   }
 ```
 <p align="center">
-  <i>Figure 4.1: Sending reading array via serial</i>
+  <i>Figure 4.1: Sending readings array via serial</i>
 </p>
 
 Figure 4.2 shows the core of our scanning code is moving the servo, checking to see if a reading should be sent and if the tilt servo should be moved up. This causes a side-to-side “grid” scanning motion.
@@ -386,3 +386,5 @@ if(moving){
 </p>
 
 ## Reflection
+___
+
