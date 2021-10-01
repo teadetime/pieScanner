@@ -5,14 +5,16 @@ Here’s a photo of our final results of a scan of the letter “O”
 
 RESULT PHOTO!
 <p align="center">
-  <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="49%">
+  <img src="images/oScanSetup.jpg" width="49%">
   <img src="https://pocket-syndicated-images.s3.amazonaws.com/607f458ececf6.jpg" width="49%">
   <br/>
   <i>Figure 0 </i>
 </p>
 
 Please see these links if oyu are looking for all files used:
+
 [CAD](https://cad.onshape.com/documents/00404c6b682243b94410b231/w/e0565735532057e490157cf3/e/47ad195450b799a5f13700f5)
+
 [Code](https://github.com/teadetime/pieScanner/)
 
 ## Testing Equipment
